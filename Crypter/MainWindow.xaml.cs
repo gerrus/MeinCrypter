@@ -118,7 +118,7 @@ namespace Crypter
             {
                 System.Text.UTF8Encoding encoder = new System.Text.UTF8Encoding();
                 System.Text.Decoder utf8Decode = encoder.GetDecoder();
-
+                 
                 byte[] todecode_byte = Convert.FromBase64String(data);
                 int charCount = utf8Decode.GetCharCount(todecode_byte, 0, todecode_byte.Length);
                 char[] decoded_char = new char[charCount];
