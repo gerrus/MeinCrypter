@@ -1,0 +1,58 @@
+﻿<Window x:Class="Crypter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:Crypter"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="525"
+        Height="350"
+        mc:Ignorable="d">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                <TextBlock Margin="10,0,10,0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    Passwort:
+                </TextBlock>
+                <TextBox x:Name="strPass"
+                         Width="200"
+                         Margin="10,0"
+                         HorizontalAlignment="Center"
+                         VerticalAlignment="Center"
+                         FontFamily="Sitka Display"
+                         FontSize="16"
+                         Padding="2">
+                    passwort
+                </TextBox>
+                <Button Margin="20"
+                        Click="Button_Click"
+                        Padding="5">
+                    verschlüsseln
+                </Button>
+                <Button Margin="20" Click="Button_Click_1">entschlüsseln</Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="10,0">String zum Verschlüsseln:</TextBlock>
+                <TextBox x:Name="strEncrypt"
+                         Width="100"
+                         Height="30"
+                         Margin="10,0">
+                    string
+                </TextBox>
+                <TextBlock Margin="10,0,5,0">String Entschlüsselt:</TextBlock>
+                <TextBox x:Name="strDecrypt"
+                         Width="100"
+                         Margin="10,0">
+                    string
+                </TextBox>
+            </StackPanel >
+
+            <StackPanel Orientation="Horizontal">
+                <Button Width="100" Margin="5,0,5,0" Click="Button_Click_2">Datei öffnen</Button>
+                <TextBlock Name="strDateiVerzeichniss"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
