@@ -12,34 +12,35 @@ namespace CrypterBibi
     {
         private byte[] _key;
         private byte[] _iv;
+        private string NurDateiName;
 
+       
         void KeyundIVGenerator(string password, string salt)
         {
-            byte[] _salt = Convert.FromBase64String(salt);
+            string saltneu = salt.Substring(0, 12);
+            byte[] _salt = Convert.FromBase64String(saltneu);
             Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, _salt);
             _key = pdb.GetBytes(32);
             _iv = pdb.GetBytes(16);
         }
 
-        public void EncryptFile(string password, string inputFile, string outputFile)
+        public void EncryptFile(string password, string inputFile)
         {
             try
             {
                 /*--------------Passwort in Bytes umwandeln-----------*/
-                string verschlüsselterDateiName = DateiNameEncrypter.FileNameEncoder(inputFile);
+                string verschlüsselterDateiName = DateiNameEncrypter.FileNameEncoder(NurDateiNameGeben(inputFile));
 
                 KeyundIVGenerator(password, verschlüsselterDateiName);
 
 
-                //------ Ausgangsdatei erzeugen
-
-                // FileStream fsCrypt = new FileStream(cryptFile, FileMode.Create);
+              
 
 
                 //------------ Den Crypter erzeugen
                 var crypter = MakeCryptor();
 
-
+                
                 using ( FileStream fsCrypt = new FileStream(NeuerPfad(inputFile, verschlüsselterDateiName), FileMode.Create)   )
                 {
                     using (CryptoStream cs = new CryptoStream(fsCrypt, crypter, CryptoStreamMode.Write))
@@ -52,41 +53,43 @@ namespace CrypterBibi
                         }
                     }
                 }
+                FileLöschen(inputFile);
             }
             catch (Exception e)
             {
-                // MessageBox.Show($"Encryption failed! \n {e.Message}", "Error");
+             //   MessageBox.Show($"Encryption failed! \n {e.Message}", "Error");
             }
         }
-        public void DecryptFile(string inputFile, string outputFile)
+        public void DecryptFile(string password,string inputFile)
         {
-
+            try
             {
-               
 
-                byte[] _salt = Convert.FromBase64String("saltsaltsalt");
-                Rfc2898DeriveBytes pdb = new Rfc2898DeriveBytes(password, _salt);
-                var Key = pdb.GetBytes(32);
-                var IV = pdb.GetBytes(16);
+                string entschlüsselterDateiName = DateiNameEncrypter.FileNameDecoder(NurDateiNameGeben(inputFile));
+                KeyundIVGenerator(password, NurDateiNameGeben(inputFile));
+                // string fileName = Path.GetDirectoryName(inputFile) + "\\" + base64Decode(Path.GetFileName(inputFile));
 
-                string fileName = Path.GetDirectoryName(inputFile) + "\\" + base64Decode(Path.GetFileName(inputFile));
-                FileStream fsCrypt = new FileStream(inputFile, FileMode.Open);
+                var crypter = MakeCryptor();
 
-                RijndaelManaged RMCrypto = new RijndaelManaged();
-                RMCrypto.IV = IV;
-                RMCrypto.Key = Key;
-                CryptoStream cs = new CryptoStream(fsCrypt, RMCrypto.CreateDecryptor(), CryptoStreamMode.Read);
+                using (FileStream fsCrypt = new FileStream(inputFile, FileMode.Open))
+                {
+                    using (CryptoStream cs = new CryptoStream(fsCrypt, crypter, CryptoStreamMode.Read))
+                    {
+                        using (FileStream fsOut = new FileStream(NeuerPfad(inputFile, entschlüsselterDateiName), FileMode.Create))
+                        {
+                            int data;
+                            while ((data = cs.ReadByte()) != -1)
+                                fsOut.WriteByte((byte)data);
+                        }
+                    }
+                }
 
-                FileStream fsOut = new FileStream(fileName, FileMode.Create);
+                FileLöschen(inputFile);
+            }
+            catch (Exception e)
+            {
 
-                int data;
-                while ((data = cs.ReadByte()) != -1)
-                    fsOut.WriteByte((byte)data);
-
-                fsOut.Close();
-                cs.Close();
-                fsCrypt.Close();
-
+                throw;
             }
         }
 
@@ -95,6 +98,10 @@ namespace CrypterBibi
             return Path.GetDirectoryName(inputFile) + "\\" + verschlüsselterDateiName;
         }
 
+        string NurDateiNameGeben(string inputFile)
+        {
+            return Path.GetFileName(inputFile);
+        }
         private ICryptoTransform MakeCryptor()
         {
             var RMCrypto = new RijndaelManaged
@@ -105,6 +112,14 @@ namespace CrypterBibi
 
             var crypter = RMCrypto.CreateEncryptor(RMCrypto.Key, RMCrypto.IV);
             return crypter;
+        }
+
+        void FileLöschen(string file)
+        {
+            if (File.Exists(file))
+            {
+                File.Delete(file);
+            }
         }
     }
 }

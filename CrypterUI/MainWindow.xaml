@@ -1,0 +1,52 @@
+﻿<Window x:Class="CrypterUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:local="clr-namespace:CrypterUI"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Title="MainWindow"
+        Width="525"
+        Height="133.968"
+        mc:Ignorable="d">
+    <StackPanel Orientation="Vertical">
+        <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+            <TextBlock Margin="10,0,10,0"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                Passwort:
+            </TextBlock>
+            <TextBox x:Name="strPass"
+                     Width="200"
+                     Margin="10,0"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center"
+                     FontFamily="Sitka Display"
+                     FontSize="16"
+                     Padding="2">
+                passwort
+            </TextBox>
+            <Button x:Name="btnVerschluesseln"
+                    Margin="20"
+                    Click="Verschluesseln_Click"
+                    Padding="5">
+                verschlüsseln
+            </Button>
+            <Button x:Name="btnEntschluesseln"
+                    Margin="20"
+                    Click="btnEnschlüsseln_Click">
+                entschlüsseln
+            </Button>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" />
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="btnDateiOeffnen"
+                    Width="100"
+                    Margin="5,0,5,0"
+                    Click="btnDateiOeffnen_Click">
+                Datei öffnen
+            </Button>
+            <TextBlock Name="strDateiVerzeichniss" />
+        </StackPanel>
+    </StackPanel>
+</Window>

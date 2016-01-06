@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Crypter", "Crypter\Crypter.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrypterBibi", "CrypterBibi\CrypterBibi.csproj", "{2B53FDED-AC2E-48AA-9D54-6384A5AE1674}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrypterUI", "CrypterUI\CrypterUI.csproj", "{24656B63-9BBE-4C38-A279-DED04D385BE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2B53FDED-AC2E-48AA-9D54-6384A5AE1674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B53FDED-AC2E-48AA-9D54-6384A5AE1674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B53FDED-AC2E-48AA-9D54-6384A5AE1674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24656B63-9BBE-4C38-A279-DED04D385BE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24656B63-9BBE-4C38-A279-DED04D385BE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24656B63-9BBE-4C38-A279-DED04D385BE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24656B63-9BBE-4C38-A279-DED04D385BE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

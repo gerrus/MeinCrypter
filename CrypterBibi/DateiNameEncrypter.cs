@@ -3,7 +3,7 @@ using System.Text;
 
 namespace CrypterBibi
 {
-    public  static class DateiNameEncrypter
+      static class DateiNameEncrypter
     {
         
         /// <summary>
